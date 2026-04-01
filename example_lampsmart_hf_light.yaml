@@ -1,0 +1,30 @@
+esphome:
+  name: lampsmart-hf-demo
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
+
+logger:
+
+api:
+  custom_services: true
+
+wifi:
+  ssid: "CHANGE_ME"
+  password: "CHANGE_ME"
+
+external_components:
+  - source:
+      type: local
+      path: /path/to/esphome-lampsmart-hf-light
+
+light:
+  - platform: lampsmart_hf_light
+    name: Bedroom Lamp
+    address: [0xC4, 0xC0, 0xFF, 0xFF]
+    group: 0x10
+    duration: 2000
+    cold_white_color_temperature: 167 mireds
+    warm_white_color_temperature: 333 mireds

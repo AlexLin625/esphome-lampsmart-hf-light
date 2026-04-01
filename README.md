@@ -12,8 +12,6 @@ This component packages the validated HF-protocol BLE light implementation as an
 ## Requirements
 
 - ESP32
-- ESPHome with `api:` enabled
-- `api.custom_services: true` so the `pair_<object_id>` service can be registered
 - `esp32.framework.type: esp-idf`
 
 ## Usage
@@ -24,22 +22,29 @@ esp32:
   framework:
     type: esp-idf
 
-api:
-  custom_services: true
-
 external_components:
   - source:
       type: local
-      path: /path/to/esphome-lampsmart-hf-light
+    path: /path/to/esphome-lampsmart-hf-light/components
 
 light:
   - platform: lampsmart_hf_light
     name: Bedroom Lamp
+    output_id: bedroom_lamp
     address: [0xC4, 0xC0, 0xFF, 0xFF]
-    group: 0x10
-    duration: 2000
+    group: 0x0A
+    duration: 600
     cold_white_color_temperature: 167 mireds
     warm_white_color_temperature: 333 mireds
+
+button:
+  - platform: lampsmart_hf_light
+    name: Bedroom Lamp Pair
+    lampsmart_hf_light_id: bedroom_lamp
 ```
 
-Pairing is exposed as a custom API service named `esphome.<node_name>_pair_<object_id>`. Power-cycle the lamp, then call the service during the pairing window.
+Power-cycle the lamp, then press the pairing button entity during the pairing window.
+
+`group` must match the lamp's control group/page ID. The reference `radar-smart-lamp` project uses `0x0A`; pairing uses a special packet and can still succeed even when the control group is wrong.
+
+This platform intentionally disables light transitions and defaults `duration` to `600ms`, because these lamps often ignore follow-up commands while they are still reacting to a previous packet.

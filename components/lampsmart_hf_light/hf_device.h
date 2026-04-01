@@ -21,8 +21,8 @@ class HFDevice {
 
   std::vector<uint8_t> turn_on();
   std::vector<uint8_t> turn_off();
-  std::vector<uint8_t> set_brightness(uint16_t value, NumericalOpType op = NONE);
-  std::vector<uint8_t> set_temperature(uint16_t value, NumericalOpType op = NONE);
+  std::vector<uint8_t> set_brightness(uint16_t value);
+  std::vector<uint8_t> set_temperature(uint16_t value);
   std::vector<uint8_t> pair();
 
  protected:

@@ -13,12 +13,6 @@ struct PayloadParams {
   uint8_t p2;
 };
 
-enum NumericalOpType {
-  NONE = 0x00,
-  NUM_INCREASE = 0x01,
-  NUM_DECREASE = 0x02,
-};
-
 class HFPacketBuilder {
  public:
   HFPacketBuilder();
@@ -39,8 +33,8 @@ class HFPacketBuilder {
 };
 
 PayloadParams pack_single_value(uint8_t val);
-PayloadParams pack_brightness(int val, NumericalOpType op = NUM_INCREASE);
-PayloadParams pack_temperature(int val, NumericalOpType op = NUM_INCREASE);
+PayloadParams pack_brightness(int val);
+PayloadParams pack_temperature(int val);
 
 }  // namespace hf_protocol
 }  // namespace lampsmarthf

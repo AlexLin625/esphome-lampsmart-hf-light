@@ -144,19 +144,19 @@ std::vector<uint8_t> HFPacketBuilder::build_packet(uint8_t seq_id, const std::ve
 
 PayloadParams pack_single_value(uint8_t val) { return {val, 0, 0}; }
 
-PayloadParams pack_brightness(int val, NumericalOpType op) {
+PayloadParams pack_brightness(int val) {
   val = std::clamp(val, 40, 1000);
   return {
-      static_cast<uint8_t>(op),
+      0x00,
       static_cast<uint8_t>(val / 256),
       static_cast<uint8_t>(val % 256),
   };
 }
 
-PayloadParams pack_temperature(int val, NumericalOpType op) {
+PayloadParams pack_temperature(int val) {
   val = std::clamp(val, 1, 128);
   return {
-      static_cast<uint8_t>(op),
+      0x00,
       0,
       static_cast<uint8_t>(val),
   };

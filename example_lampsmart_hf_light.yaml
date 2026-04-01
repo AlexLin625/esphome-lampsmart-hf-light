@@ -9,7 +9,6 @@ esp32:
 logger:
 
 api:
-  custom_services: true
 
 wifi:
   ssid: "CHANGE_ME"
@@ -18,13 +17,19 @@ wifi:
 external_components:
   - source:
       type: local
-      path: /path/to/esphome-lampsmart-hf-light
+    path: /path/to/esphome-lampsmart-hf-light/components
 
 light:
   - platform: lampsmart_hf_light
     name: Bedroom Lamp
+    output_id: bedroom_lamp
     address: [0xC4, 0xC0, 0xFF, 0xFF]
-    group: 0x10
-    duration: 2000
+    group: 0x0A
+    duration: 600
     cold_white_color_temperature: 167 mireds
     warm_white_color_temperature: 333 mireds
+
+button:
+  - platform: lampsmart_hf_light
+    name: Bedroom Lamp Pair
+    lampsmart_hf_light_id: bedroom_lamp

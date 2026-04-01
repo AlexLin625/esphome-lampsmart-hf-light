@@ -16,12 +16,12 @@ std::vector<uint8_t> HFDevice::turn_off() {
   return builder_.build_packet(group_id_, address_, 0xB2, next_seq_(), pack_single_value(0));
 }
 
-std::vector<uint8_t> HFDevice::set_brightness(uint16_t value, NumericalOpType op) {
-  return builder_.build_packet(group_id_, address_, 0xB5, next_seq_(), pack_brightness(value, op));
+std::vector<uint8_t> HFDevice::set_brightness(uint16_t value) {
+  return builder_.build_packet(group_id_, address_, 0xB5, next_seq_(), pack_brightness(value));
 }
 
-std::vector<uint8_t> HFDevice::set_temperature(uint16_t value, NumericalOpType op) {
-  return builder_.build_packet(group_id_, address_, 0xB7, next_seq_(), pack_temperature(value, op));
+std::vector<uint8_t> HFDevice::set_temperature(uint16_t value) {
+  return builder_.build_packet(group_id_, address_, 0xB7, next_seq_(), pack_temperature(value));
 }
 
 std::vector<uint8_t> HFDevice::pair() {

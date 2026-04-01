@@ -5,6 +5,7 @@ from esphome.const import (
     CONF_CONSTANT_BRIGHTNESS,
     CONF_COLD_WHITE_COLOR_TEMPERATURE,
     CONF_DURATION,
+    CONF_GAMMA_CORRECT,
     CONF_MIN_BRIGHTNESS,
     CONF_OUTPUT_ID,
     CONF_REVERSED,
@@ -12,7 +13,7 @@ from esphome.const import (
 )
 
 AUTO_LOAD = []
-DEPENDENCIES = ["esp32", "api"]
+DEPENDENCIES = ["esp32"]
 
 CONF_ADDRESS = "address"
 CONF_GROUP = "group"
@@ -36,15 +37,16 @@ def _validate_address(value):
 
 
 CONFIG_SCHEMA = cv.All(
-    light.RGB_LIGHT_SCHEMA.extend(
+    light.LIGHT_SCHEMA.extend(
         {
             cv.GenerateID(CONF_OUTPUT_ID): cv.declare_id(LampSmartHFLight),
             cv.Required(CONF_ADDRESS): _validate_address,
-            cv.Optional(CONF_GROUP, default=0x10): cv.hex_uint8_t,
-            cv.Optional(CONF_DURATION, default=2000): cv.positive_int,
+            cv.Required(CONF_GROUP): cv.hex_uint8_t,
+            cv.Optional(CONF_DURATION, default=600): cv.positive_int,
             cv.Optional(CONF_COLD_WHITE_COLOR_TEMPERATURE): cv.color_temperature,
             cv.Optional(CONF_WARM_WHITE_COLOR_TEMPERATURE): cv.color_temperature,
             cv.Optional(CONF_CONSTANT_BRIGHTNESS, default=False): cv.boolean,
+            cv.Optional(CONF_GAMMA_CORRECT, default=2.8): cv.positive_float,
             cv.Optional(CONF_REVERSED, default=False): cv.boolean,
             cv.Optional(CONF_MIN_BRIGHTNESS, default=40): cv.int_range(min=1, max=1000),
         }

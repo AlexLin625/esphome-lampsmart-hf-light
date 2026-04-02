@@ -26,8 +26,8 @@ light:
     address: [0xC4, 0xC0, 0xFF, 0xFF]
     group: 0x0A
     duration: 600
-    cold_white_color_temperature: 167 mireds
-    warm_white_color_temperature: 333 mireds
+    cold_white_color_temperature: 250 mireds
+    warm_white_color_temperature: 500 mireds
 
 button:
   - platform: lampsmart_hf_light

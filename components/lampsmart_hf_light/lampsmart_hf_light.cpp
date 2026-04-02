@@ -167,10 +167,11 @@ uint16_t LampSmartHFLight::temperature_from_channels_(float cold_white, float wa
   const float total = cold_white + warm_white;
   float cold_ratio = total > 0.0f ? cold_white / total : 0.5f;
   cold_ratio = std::clamp(cold_ratio, 0.0f, 1.0f);
+  uint16_t protocol_temperature = static_cast<uint16_t>(std::lround(cold_ratio * 140.0f));
   if (this->reversed_) {
-    cold_ratio = 1.0f - cold_ratio;
+    protocol_temperature = static_cast<uint16_t>(140 - protocol_temperature);
   }
-  return static_cast<uint16_t>(std::lround(1.0f + cold_ratio * 127.0f));
+  return protocol_temperature;
 }
 
 }  // namespace lampsmarthf

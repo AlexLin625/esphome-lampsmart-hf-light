@@ -53,7 +53,7 @@ esp_err_t LampController::set_brightness(uint16_t value) {
 }
 
 esp_err_t LampController::set_temperature(uint16_t value) {
-  const uint16_t clamped = std::min<uint16_t>(128, value);
+  const uint16_t clamped = std::min<uint16_t>(140, value);
   const std::vector<uint8_t> payload = this->device_.set_temperature(clamped);
   ESP_LOGI(TAG, "Temperature payload size=%u value=%u", static_cast<unsigned>(payload.size()), clamped);
   return this->advertise_for_("temperature", payload, this->tx_duration_ms_);

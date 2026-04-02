@@ -42,8 +42,8 @@ class LampSmartHFLight : public light::LightOutput, public Component, public Ent
   std::array<uint8_t, 4> address_{{0x00, 0x00, 0x00, 0x00}};
   uint8_t group_id_{0x10};
   uint32_t tx_duration_{600};
-  float cold_white_temperature_{167.0f};
-  float warm_white_temperature_{333.0f};
+  float cold_white_temperature_{250.0f};
+  float warm_white_temperature_{500.0f};
   bool constant_brightness_{false};
   bool reversed_{false};
   uint16_t min_brightness_{40};

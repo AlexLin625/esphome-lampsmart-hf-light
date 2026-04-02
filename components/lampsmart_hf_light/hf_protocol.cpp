@@ -154,7 +154,7 @@ PayloadParams pack_brightness(int val) {
 }
 
 PayloadParams pack_temperature(int val) {
-  val = std::clamp(val, 1, 128);
+  val = std::clamp(val, 0, 140);
   return {
       0x00,
       0,
